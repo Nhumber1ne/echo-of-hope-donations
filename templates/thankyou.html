@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Thank You — Echo of Hope Ghana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a8f5f, #1a73e8, #f9c74f);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .logo {
+      width: 120px;
+      max-width: 40%;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      color: #198754;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      color: #444;
+    }
+
+    .amount {
+      font-weight: bold;
+      color: #0d6efd;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #198754;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #157347;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      .logo {
+        width: 100px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        margin: 10px auto;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+      p {
+        font-size: 0.95rem;
+      }
+      .logo {
+        width: 85px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Echo of Hope Logo" class="logo">
+
+    <h1>Thank You, {{ name }}!</h1>
+    <p>Your generous donation of 
+      <span class="amount">GHS {{ amount }}</span> 
+      helps bring smiles and hope to those who need it most.</p>
+
+    <p>We’re deeply grateful for your kindness and support. 💛</p>
+
+    <a href="/" class="btn">Make Another Donation</a>
+
+    <footer>
+      Echo of Hope Ghana &copy; {{ datetime.now().year }}<br>
+      Together, we make the world brighter 🌍
+    </footer>
+  </div>
+</body>
+</html>

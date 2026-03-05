@@ -1,0 +1,121 @@
+/* ===== GENERAL STYLES ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fff8f0, #f8f9ff);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  background: #fff;
+  max-width: 450px;
+  width: 90%;
+  margin: 30px auto;
+  padding: 30px 25px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* ===== HEADINGS ===== */
+h1 {
+  color: #174ea6;
+  font-size: 1.9em;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #444;
+  font-weight: 500;
+  margin-bottom: 25px;
+  font-size: 1.05em;
+}
+
+/* ===== FORM ELEMENTS ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: 600;
+  text-align: left;
+  font-size: 0.95em;
+  color: #333;
+}
+
+input {
+  padding: 12px 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+input:focus {
+  border-color: #174ea6;
+  box-shadow: 0 0 4px rgba(23, 78, 166, 0.3);
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  background-color: #174ea6;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0f3b85;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(23, 78, 166, 0.3);
+}
+
+/* ===== NOTE TEXT ===== */
+.note {
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* ===== IMAGE STYLES ===== */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  color: #777;
+  font-size: 0.85em;
+  margin-bottom: 20px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+  }
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  .btn {
+    font-size: 0.95em;
+  }
+}

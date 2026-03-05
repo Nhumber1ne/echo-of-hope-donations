@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+.env
+donations.db
+donations_log.csv
+*.json

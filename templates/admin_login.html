@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin Login — Echo of Hope Outreach Ghana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f9c74f, #1a8f5f, #1a73e8, #d62828);
+      background-size: 300% 300%;
+      animation: gradientShift 12s ease infinite;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px 35px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    img {
+      width: 70%;
+      max-width: 220px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      color: #222;
+      font-weight: 600;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+    }
+
+    input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #1a8f5f, #1a73e8);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 22px;
+      }
+
+      img {
+        width: 60%;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <img src="{{ url_for('static', filename='images/flyer.jpg') }}" alt="Echo of Hope Flyer">
+
+    <h1>Admin Panel Login</h1>
+
+    <form method="POST">
+      <input name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit" class="btn">Secure Login</button>
+    </form>
+
+    <div class="footer">
+      Echo of Hope Ghana — Administration Portal
+    </div>
+  </div>
+
+</body>
+</html>

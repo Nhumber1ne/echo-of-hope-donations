@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Donate — Echo of Hope Ghana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f9c74f, #1a8f5f, #1a73e8);
+      background-size: 300% 300%;
+      animation: gradientShift 14s ease infinite;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.94);
+      padding: 25px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    img {
+      width: 70%;
+      max-width: 240px;
+      height: auto;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      color: #198754;
+      margin-bottom: 5px;
+      font-size: 1.8rem;
+    }
+
+    .subtitle {
+      color: #333;
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      padding: 11px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      border-color: #198754;
+      outline: none;
+    }
+
+    .btn {
+      background-color: #198754;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #157347;
+      transform: scale(1.05);
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    /* Tablet adjustments */
+    @media (max-width: 768px) {
+      .container {
+        width: 92%;
+        padding: 20px;
+      }
+
+      img {
+        width: 65%;
+        max-width: 200px;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Mobile phones */
+    @media (max-width: 480px) {
+      .container {
+        width: 90%;
+        padding: 18px;
+      }
+
+      img {
+        width: 60%;
+        max-width: 180px;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .subtitle {
+        font-size: 0.95rem;
+      }
+
+      input, .btn {
+        font-size: 0.95rem;
+        padding: 10px;
+      }
+
+      footer {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="{{ url_for('static', filename='images/flyer.jpg') }}" alt="Echo of Hope Flyer">
+
+    <h1>Echo of Hope Ghana</h1>
+    <p class="subtitle">Show some love this December — donate now 💛</p>
+
+    <form action="/pay" method="POST" id="donateForm">
+      <label for="name">Your Full Name</label>
+      <input id="name" name="name" placeholder="e.g. Mansah Musah" required>
+
+      <label for="amount">Amount (GHS)</label>
+      <input id="amount" name="amount" type="number" step="0.01" placeholder="e.g. 50.00" required>
+
+      <button type="submit" class="btn">Donate Now</button>
+    </form>
+
+    <p class="note">
+      You’ll be redirected to Paystack’s secure payment window to complete the donation.
+    </p>
+
+    <footer>
+      Echo of Hope Ghana &copy; {{ datetime.now().year }}
+    </footer>
+  </div>
+</body>
+</html>
