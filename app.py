@@ -40,9 +40,7 @@ PAYSTACK_PUBLIC_KEY = os.getenv(
 PAYSTACK_INIT_URL = "https://api.paystack.co/transaction/initialize"
 PAYSTACK_VERIFY_URL = "https://api.paystack.co/transaction/verify/{}"
 
-print("Loaded Paystack keys:")
-print("Secret:", PAYSTACK_SECRET_KEY)
-print("Public:", PAYSTACK_PUBLIC_KEY)
+print("Paystack keys loaded successfully")
 
 
 # -------------------- DATABASE SETUP --------------------
