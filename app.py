@@ -111,6 +111,33 @@ def pay():
     return redirect(res["data"]["authorization_url"])
 
 
+@app.route("/api/public-donations")
+def public_donations():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT donor_name, amount, datetime
+        FROM donations
+        ORDER BY id DESC
+        LIMIT 10
+    """)
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    donations = []
+
+    for row in rows:
+        donations.append({
+            "name": row[0],
+            "amount": row[1],
+            "datetime": row[2]
+        })
+
+    return {"donations": donations}
+
+
 @app.route("/callback")
 def callback():
     reference = request.args.get("reference")
@@ -170,6 +197,38 @@ def callback():
         datetime=datetime
     )
 
+@app.route("/api/donations")
+@login_required
+def get_donations():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT donor_name, amount, datetime, reference
+        FROM donations
+        ORDER BY id DESC
+    """)
+    rows = cursor.fetchall()
+    conn.close()
+
+    donations = []
+    total_amount = 0.0
+
+    for row in rows:
+        donations.append({
+            "name": row[0],
+            "amount": row[1],
+            "datetime": row[2],
+            "reference": row[3]
+        })
+        total_amount += row[1]
+
+    return {
+        "donations": donations,
+        "total_amount": round(total_amount, 2),
+        "count": len(donations)
+    }
+
 
 # -------------------- ADMIN LOGIN --------------------
 
@@ -226,6 +285,41 @@ def admin_dashboard():
 def admin_logout():
     session.pop("admin_logged_in", None)
     return redirect(url_for("admin_login"))
+
+
+@app.route("/api/donations")
+@login_required
+def get_donations():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT donor_name, amount, datetime, reference
+        FROM donations
+        ORDER BY id DESC
+        LIMIT 20
+    """)
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    donations = []
+    total_amount = 0.0
+
+    for row in rows:
+        donations.append({
+            "name": row[0],
+            "amount": row[1],
+            "datetime": row[2],
+            "reference": row[3]
+        })
+        total_amount += row[1]
+
+    return {
+        "donations": donations,
+        "total_amount": f"{total_amount:.2f}",
+        "count": len(donations)
+    }
 
 
 # -------------------- MAIN --------------------
