@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Admin Dashboard — Echo of Hope Ghana</title>
+  <title>Admin Dashboard — Echo of Hope Outreach Ghana</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -147,12 +147,12 @@
 
     <div class="stats">
       <div class="card">
-        <h2>GHS {{ total_amount }}</h2>
+        <h2 id="totalAmount">GHS {{ total_amount }}</h2>
         <p>Total Donations</p>
       </div>
 
       <div class="card">
-        <h2>{{ donations|length }}</h2>
+        <h2 id="totalDonors">{{ donations|length }}</h2>
         <p>Total Donors</p>
       </div>
     </div>
@@ -166,7 +166,9 @@
           <th>Reference</th>
         </tr>
       </thead>
-      <tbody>
+
+      <!-- IMPORTANT: ID added here -->
+      <tbody id="donationTable">
         {% for donation in donations %}
         <tr>
           <td>{{ donation["Donor Name"] }}</td>
@@ -180,6 +182,45 @@
 
     <a href="/admin/logout" class="logout">Logout</a>
   </div>
+
+  <script>
+    async function fetchDonations() {
+      try {
+        const response = await fetch("/api/donations");
+        const data = await response.json();
+
+        // Update totals safely
+        document.getElementById("totalAmount").innerText = "GHS " + data.total_amount;
+        document.getElementById("totalDonors").innerText = data.count;
+
+        // Update table
+        const tableBody = document.getElementById("donationTable");
+        tableBody.innerHTML = "";
+
+        data.donations.forEach(d => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${d.name}</td>
+            <td>GHS ${parseFloat(d.amount).toFixed(2)}</td>
+            <td>${d.datetime}</td>
+            <td>${d.reference}</td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+
+      } catch (error) {
+        console.error("Error fetching donations:", error);
+      }
+    }
+
+    // Refresh every 5 seconds
+    setInterval(fetchDonations, 5000);
+
+    // Initial load AFTER page renders
+    window.onload = fetchDonations;
+  </script>
 
 </body>
 </html>

@@ -26,6 +26,11 @@ app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "supersecretkey")
 
 
+# -------------------- ADMIN CREDENTIALS --------------------
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+
+
 # -------------------- PAYSTACK CONFIG --------------------
 PAYSTACK_SECRET_KEY = os.getenv(
     "PAYSTACK_SECRET_KEY",
@@ -174,14 +179,11 @@ def admin_login():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        if (
-            username == os.getenv("ADMIN_USERNAME") and
-            password == os.getenv("ADMIN_PASSWORD")
-        ):
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
             session["admin_logged_in"] = True
             return redirect(url_for("admin_dashboard"))
-        else:
-            return "Invalid credentials", 401
+
+        return render_template("admin_login.html", error="Invalid credentials")
 
     return render_template("admin_login.html")
 
